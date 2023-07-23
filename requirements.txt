@@ -5,3 +5,4 @@ deepchem==2.5.0
 rdkit==2023.03.1
 jupyter
 matplotlib
+tensorflow
