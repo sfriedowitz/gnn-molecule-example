@@ -2,5 +2,6 @@ pandas==2.0.3
 torch==2.0.1
 torch-geometric==2.3.1
 deepchem==2.5.0
+rdkit==2023.03.1
 jupyter
 matplotlib
