@@ -4,7 +4,20 @@ import numpy as np
 from mlflow.models.signature import ModelSignature
 from mlflow.types.schema import Schema, TensorSpec
 
-MODEL_PARAMETER_GRID = {
+
+INPUT_SCHEMA = Schema(
+    [
+        TensorSpec(np.dtype(np.float32), (-1, 30), name="x"),
+        TensorSpec(np.dtype(np.float32), (-1, 11), name="edge_attr"),
+        TensorSpec(np.dtype(np.int32), (2, 30), name="edge_index"),
+        TensorSpec(np.dtype(np.int32), (-1, 1), name="batch_index"),
+    ]
+)
+OUTPUT_SCHEMA = Schema([TensorSpec(np.dtype(np.float32), (-1, 1))])
+MODEL_SIGNATURE = ModelSignature(inputs=INPUT_SCHEMA, outputs=OUTPUT_SCHEMA)
+
+
+PARAMETER_GRID = {
     "batch_size": [32, 128, 64],
     "learning_rate": [0.1, 0.05, 0.01, 0.001],
     "weight_decay": [0.0001, 0.00001, 0.001],
@@ -20,23 +33,10 @@ MODEL_PARAMETER_GRID = {
     "dense_neurons": [16, 128, 64, 256, 32],
 }
 
-INPUT_SCHEMA = Schema(
-    [
-        TensorSpec(np.dtype(np.float32), (-1, 30), name="x"),
-        TensorSpec(np.dtype(np.float32), (-1, 11), name="edge_attr"),
-        TensorSpec(np.dtype(np.int32), (2, 30), name="edge_index"),
-        TensorSpec(np.dtype(np.int32), (-1, 1), name="batch_index"),
-    ]
-)
-
-OUTPUT_SCHEMA = Schema([TensorSpec(np.dtype(np.float32), (-1, 1))])
-
-MODEL_SIGNATURE = ModelSignature(inputs=INPUT_SCHEMA, outputs=OUTPUT_SCHEMA)
-
 
 @dataclass
-class ModelParameters:
-    """Best model parameter defaults obtained from hyperparameter optimization."""
+class TrainingConfig:
+    """Parameter defaults for a training run obtained from hyperparameter optimization."""
 
     batch_size: int = 128
     learning_rate: float = 0.01
