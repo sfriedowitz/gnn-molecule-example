@@ -102,9 +102,9 @@ class GNN(torch.nn.Module):
 
             # Output block
             x = torch.relu(self.linear1(x))
-            x = F.dropout(x, p=self.config.dropout_rate, training=self.training)
+            x = F.dropout(x, p=0.8, training=self.training)
             x = torch.relu(self.linear2(x))
-            x = F.dropout(x, p=self.config.dropout_rate, training=self.training)
+            x = F.dropout(x, p=0.8, training=self.training)
             x = self.linear3(x)
 
             return x

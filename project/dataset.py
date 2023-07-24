@@ -1,13 +1,11 @@
 import os
-from typing import List, Tuple, Union
 import numpy as np
 import pandas as pd
 from rdkit import Chem
 from tqdm import tqdm
 
 import torch
-import torch_geometric
-from torch_geometric.data import Dataset, Data
+from torch_geometric.data import Dataset
 from deepchem.feat import MolGraphConvFeaturizer
 
 
