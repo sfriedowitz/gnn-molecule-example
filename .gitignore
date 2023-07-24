@@ -134,6 +134,5 @@ cython_debug/
 
 # Local Data
 data/processed
-logs
 mlruns
-dev.ipynb
+logs
